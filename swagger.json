@@ -1,0 +1,660 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WatchDog API",
+    "description": "WatchDog API",
+    "version": "1.0.0"
+  },
+  "host": "watchdog-7ja8.onrender.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/clients/": {
+      "get": {
+        "tags": ["Clients"],
+        "description": "list all existing clients",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Clients"],
+        "description": "create new client record",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "firstName lastName"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "myemailaddress@email.com"                 
+                },
+                 "city": {
+                  "example": "Springfield"
+                },
+                "location": {
+                  "example": "Illinois"
+                },
+                "image": {
+                  "example": "imageBase64EncodedUrlHere"
+                },              
+                "bio": {
+                  "example": "Hello this is my biography"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/clients/{id}": {
+      "get": {
+        "tags": ["Clients"],
+        "description": "obtain client data by their record id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Clients"],
+        "description": "Update a single or multiple field of a given document",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the client to update.",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "firstName lastName"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "myemailaddress@email.com"                 
+                },
+                 "city": {
+                  "example": "Springfield"
+                },
+                "location": {
+                  "example": "Illinois"
+                },
+                "image": {
+                  "example": "imageBase64EncodedUrlHere"
+                },              
+                "bio": {
+                  "example": "Hello this is my biography"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Clients"],
+        "description": "delete a client by their record id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/caregivers/": {
+      "get": {
+        "description": "list all existing clients",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "create new client record",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "firstName lastName"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "myemailaddress@email.com"                 
+                },
+                 "city": {
+                  "example": "Springfield"
+                },
+                "location": {
+                  "example": "Illinois"
+                },
+                "image": {
+                  "example": "imageBase64EncodedUrlHere"
+                },              
+                "bio": {
+                  "example": "Hello this is my biography"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/caregivers/{id}": {
+      "get": {
+        "description": "obtain client data by their record id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "Update a single or multiple field of a given document",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the client to update.",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "firstName lastName"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "myemailaddress@email.com"                 
+                },
+                 "city": {
+                  "example": "Springfield"
+                },
+                "location": {
+                  "example": "Illinois"
+                },
+                "image": {
+                  "example": "imageBase64EncodedUrlHere"
+                },              
+                "bio": {
+                  "example": "Hello this is my biography"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "description": "delete a client by their record id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/services/": {
+      "get": {
+        "description": "list all existing clients",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "create new client record",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "firstName lastName"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "myemailaddress@email.com"                 
+                },
+                 "city": {
+                  "example": "Springfield"
+                },
+                "location": {
+                  "example": "Illinois"
+                },
+                "image": {
+                  "example": "imageBase64EncodedUrlHere"
+                },              
+                "bio": {
+                  "example": "Hello this is my biography"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/services/{id}": {
+      "get": {
+        "description": "obtain client data by their record id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "Update a single or multiple field of a given document",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the client to update.",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "firstName lastName"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "myemailaddress@email.com"                 
+                },
+                 "city": {
+                  "example": "Springfield"
+                },
+                "location": {
+                  "example": "Illinois"
+                },
+                "image": {
+                  "example": "imageBase64EncodedUrlHere"
+                },              
+                "bio": {
+                  "example": "Hello this is my biography"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "description": "delete a client by their record id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/appointments/": {
+      "get": {
+        "description": "list all existing clients",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "create new client record",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "firstName lastName"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "myemailaddress@email.com"                 
+                },
+                 "city": {
+                  "example": "Springfield"
+                },
+                "location": {
+                  "example": "Illinois"
+                },
+                "image": {
+                  "example": "imageBase64EncodedUrlHere"
+                },              
+                "bio": {
+                  "example": "Hello this is my biography"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/appointments/{id}": {
+      "get": {
+        "description": "obtain client data by their record id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "Update a single or multiple field of a given document",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the client to update.",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "firstName lastName"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "myemailaddress@email.com"                 
+                },
+                 "city": {
+                  "example": "Springfield"
+                },
+                "location": {
+                  "example": "Illinois"
+                },
+                "image": {
+                  "example": "imageBase64EncodedUrlHere"
+                },              
+                "bio": {
+                  "example": "Hello this is my biography"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "description": "delete a client by their record id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
