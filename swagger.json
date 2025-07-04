@@ -11,10 +11,19 @@
     "https"
   ],
   "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/clients/": {
       "get": {
-        "tags": ["Clients"],
-        "description": "list all existing clients",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -25,38 +34,7 @@
         }
       },
       "post": {
-        "tags": ["Clients"],
-        "description": "create new client record",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "firstName lastName"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "myemailaddress@email.com"                 
-                },
-                 "city": {
-                  "example": "Springfield"
-                },
-                "location": {
-                  "example": "Illinois"
-                },
-                "image": {
-                  "example": "imageBase64EncodedUrlHere"
-                },              
-                "bio": {
-                  "example": "Hello this is my biography"
-                }
-              }
-            }
-          }
-        ],
+        "description": "",
         "responses": {
           "201": {
             "description": "Created"
@@ -69,11 +47,7 @@
     },
     "/clients/{id}": {
       "get": {
-        "tags": ["Clients"],
-        "description": "obtain client data by their record id",
-        "produces": [
-          "application/json"
-        ],
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -98,43 +72,13 @@
         }
       },
       "put": {
-        "tags": ["Clients"],
-        "description": "Update a single or multiple field of a given document",
+        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "ID of the client to update.",
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "firstName lastName"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "myemailaddress@email.com"                 
-                },
-                 "city": {
-                  "example": "Springfield"
-                },
-                "location": {
-                  "example": "Illinois"
-                },
-                "image": {
-                  "example": "imageBase64EncodedUrlHere"
-                },              
-                "bio": {
-                  "example": "Hello this is my biography"
-                }
-              }
-            }
           }
         ],
         "responses": {
@@ -150,8 +94,7 @@
         }
       },
       "delete": {
-        "tags": ["Clients"],
-        "description": "delete a client by their record id",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -176,9 +119,9 @@
         }
       }
     },
-    "/caregivers/": {
+    "/caregiver": {
       "get": {
-        "description": "list all existing clients",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -189,37 +132,7 @@
         }
       },
       "post": {
-        "description": "create new client record",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "firstName lastName"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "myemailaddress@email.com"                 
-                },
-                "city": {
-                  "example": "Springfield"
-                },
-                "location": {
-                  "example": "Illinois"
-                },
-                "image": {
-                  "example": "imageBase64EncodedUrlHere"
-                },              
-                "bio": {
-                  "example": "Hello this is my biography"
-                }
-              }
-            }
-          }
-        ],
+        "description": "",
         "responses": {
           "201": {
             "description": "Created"
@@ -230,12 +143,9 @@
         }
       }
     },
-    "/caregivers/{id}": {
+    "/caregiver/{id}": {
       "get": {
-        "description": "obtain client data by their record id",
-        "produces": [
-          "application/json"
-        ],
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -260,42 +170,13 @@
         }
       },
       "put": {
-        "description": "Update a single or multiple field of a given document",
+        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "ID of the client to update.",
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "firstName lastName"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "myemailaddress@email.com"                 
-                },
-                 "city": {
-                  "example": "Springfield"
-                },
-                "location": {
-                  "example": "Illinois"
-                },
-                "image": {
-                  "example": "imageBase64EncodedUrlHere"
-                },              
-                "bio": {
-                  "example": "Hello this is my biography"
-                }
-              }
-            }
           }
         ],
         "responses": {
@@ -311,327 +192,7 @@
         }
       },
       "delete": {
-        "description": "delete a client by their record id",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/services/": {
-      "get": {
-        "description": "list all existing clients",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "description": "create new client record",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "firstName lastName"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "myemailaddress@email.com"                 
-                },
-                 "city": {
-                  "example": "Springfield"
-                },
-                "location": {
-                  "example": "Illinois"
-                },
-                "image": {
-                  "example": "imageBase64EncodedUrlHere"
-                },              
-                "bio": {
-                  "example": "Hello this is my biography"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
-    "/services/{id}": {
-      "get": {
-        "description": "obtain client data by their record id",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "put": {
-        "description": "Update a single or multiple field of a given document",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "ID of the client to update.",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "firstName lastName"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "myemailaddress@email.com"                 
-                },
-                 "city": {
-                  "example": "Springfield"
-                },
-                "location": {
-                  "example": "Illinois"
-                },
-                "image": {
-                  "example": "imageBase64EncodedUrlHere"
-                },              
-                "bio": {
-                  "example": "Hello this is my biography"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "delete": {
-        "description": "delete a client by their record id",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/appointments/": {
-      "get": {
-        "description": "list all existing clients",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "description": "create new client record",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "firstName lastName"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "myemailaddress@email.com"                 
-                },
-                 "city": {
-                  "example": "Springfield"
-                },
-                "location": {
-                  "example": "Illinois"
-                },
-                "image": {
-                  "example": "imageBase64EncodedUrlHere"
-                },              
-                "bio": {
-                  "example": "Hello this is my biography"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
-    "/appointments/{id}": {
-      "get": {
-        "description": "obtain client data by their record id",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "put": {
-        "description": "Update a single or multiple field of a given document",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "ID of the client to update.",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "firstName lastName"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "myemailaddress@email.com"                 
-                },
-                 "city": {
-                  "example": "Springfield"
-                },
-                "location": {
-                  "example": "Illinois"
-                },
-                "image": {
-                  "example": "imageBase64EncodedUrlHere"
-                },              
-                "bio": {
-                  "example": "Hello this is my biography"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "delete": {
-        "description": "delete a client by their record id",
+        "description": "",
         "parameters": [
           {
             "name": "id",
