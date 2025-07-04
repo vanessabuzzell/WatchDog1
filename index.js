@@ -52,3 +52,5 @@ mongodb.initDb((err, mongodb) => {
         });
     }
 });
+
+export default app;
