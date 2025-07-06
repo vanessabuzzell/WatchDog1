@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url';
 import express from 'express';
 import indexRoutes from './routes/index.js';
 import clientsRoutes from './routes/clients.js';
+import caregiverRoutes from './routes/caregiver.js';
 import bodyParser from 'body-parser';
 import mongodb from './db/connect.js';
 
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'views')))
 // routes
 app.use("/", indexRoutes);
 app.use("/clients", clientsRoutes);
+app.use("/caregiver", caregiverRoutes);
 
 // catch all error handler
 app.use((err, req, res, next) => {

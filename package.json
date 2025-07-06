@@ -24,6 +24,7 @@
   "homepage": "https://github.com/vanessabuzzell/WatchDog#readme",
   "dependencies": {
     "dotenv": "^17.0.0",
+    "express": "^5.1.0",
     "mongodb": "^6.17.0",
     "mongoose": "^8.16.1",
     "swagger-jsdoc": "^6.2.8",
