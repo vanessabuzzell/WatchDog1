@@ -3,11 +3,11 @@ import request from 'supertest';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import app from '../index.js';
 import service from '../models/services.js';
-let mongoServer;    
+let mongoServer;
 beforeAll(async () => {
     mongoServer = await MongoMemoryServer.create();
-    const uri = mongoServer.getUri();
-    await mongoose.connect(uri);
+    // const uri = mongoServer.getUri();
+    // await mongoose.connect(uri);
 });
 
 afterAll(async () => {
@@ -165,7 +165,7 @@ describe('DELETE /services/:id', () => {
         expect(res.body.message).toMatch(/Service not found/i);
     });
 }
-);  
+);
 describe('Invalid ID format', () => {
     it('should return 400 for invalid service ID format', async () => {
         const res = await request(app).get('/services/invalidId');
@@ -191,5 +191,5 @@ describe('Service validation errors', () => {
         expect(res.statusCode).toBe(400);
         expect(res.body.message).toMatch(/Validation error/i);
     });
-}); 
+});
 export default mongoServer;

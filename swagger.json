@@ -5,6 +5,24 @@
     "description": "WatchDog API",
     "version": "1.0.0"
   },
+    "tags": [
+    {
+      "name": "Clients",
+      "description": "Users in seek of dog care treatment"
+    },
+    {
+      "name": "Caregiver", 
+      "description": "Businesses/entities offering dog care services"
+    },
+        {
+      "name": "Services", 
+      "description": "List of dog care services provided"
+    },
+        {
+      "name": "Appointments", 
+      "description": "Combination of a client, caregiver, and list of services"
+    }
+  ],
   "host": "watchdog-7ja8.onrender.com",
   "basePath": "/",
   "schemes": [
@@ -21,8 +39,9 @@
         }
       }
     },
-    "/clients/": {
+    "/clients": {
       "get": {
+        "tags": ["Clients"],
         "description": "",
         "responses": {
           "200": {
@@ -34,7 +53,38 @@
         }
       },
       "post": {
+        "tags": ["Clients"],
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "firstName lastName"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "myemailaddress@email.com"                 
+                },
+                 "city": {
+                  "example": "Springfield"
+                },
+                "location": {
+                  "example": "Illinois"
+                },
+                "image": {
+                  "example": "imageBase64EncodedUrlHere"
+                },              
+                "bio": {
+                  "example": "Hello this is my biography"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -47,7 +97,11 @@
     },
     "/clients/{id}": {
       "get": {
+        "tags": ["Clients"],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -72,13 +126,43 @@
         }
       },
       "put": {
+        "tags": ["Clients"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
+             "description": "ID of the client to update.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "firstName lastName"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "myemailaddress@email.com"                 
+                },
+                 "city": {
+                  "example": "Springfield"
+                },
+                "location": {
+                  "example": "Illinois"
+                },
+                "image": {
+                  "example": "imageBase64EncodedUrlHere"
+                },              
+                "bio": {
+                  "example": "Hello this is my biography"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -94,6 +178,7 @@
         }
       },
       "delete": {
+        "tags": ["Clients"],
         "description": "",
         "parameters": [
           {
@@ -121,6 +206,7 @@
     },
     "/caregiver": {
       "get": {
+        "tags": ["Caregiver"],
         "description": "",
         "responses": {
           "200": {
@@ -132,7 +218,58 @@
         }
       },
       "post": {
+        "tags": ["Caregiver"],
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "firstName lastName"
+                },
+                "services": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": ["hairgrooming", "walking", "vaccination"]                 
+                },
+                 "hourlyRate": {
+                  "type": "number",
+                  "example": 100
+                },
+                "availability": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "date-time"
+                    },
+                  "example": ["2025-07-15T13:30:00Z", "2025-08-15T13:30:00Z", "2025-09-15T13:30:00Z" ]
+                },
+                 "yearsExperience": {
+                  "type": "number",
+                  "example": 5
+                },
+                 "bio": {
+                  "type": "string",
+                  "example": "Hello this is my biography"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "imageBase64EncodedUrlHere"
+                },              
+                "email": {
+                  "type": "string",
+                  "example": "dogcaregiver@lovedogs.com"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -145,7 +282,11 @@
     },
     "/caregiver/{id}": {
       "get": {
+        "tags": ["Caregiver"],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -170,13 +311,63 @@
         }
       },
       "put": {
+        "tags": ["Caregiver"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
+            "description": "ID of the caregiver to update.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "firstName lastName"
+                },
+                "services": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": ["hairgrooming", "walking", "vaccination"]                 
+                },
+                 "hourlyRate": {
+                  "type": "number",
+                  "example": 100
+                },
+                "availability": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "date-time"
+                    },
+                  "example": ["2025-07-15T13:30:00Z", "2025-08-15T13:30:00Z", "2025-09-15T13:30:00Z" ]
+                },
+                 "yearsExperience": {
+                  "type": "number",
+                  "example": 5
+                },
+                 "bio": {
+                  "type": "string",
+                  "example": "Hello this is my biography"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "imageBase64EncodedUrlHere"
+                },              
+                "email": {
+                  "type": "string",
+                  "example": "dogcaregiver@lovedogs.com"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -192,6 +383,392 @@
         }
       },
       "delete": {
+        "tags": ["Caregiver"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/services": {
+      "get": {
+        "tags": ["Services"],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Services"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "serviceName": {
+                  "type": "string",
+                  "example": "Hair trimming"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "description text here"                 
+                },
+                 "price": {
+                  "type": "number",
+                  "example": 100
+                },
+                "duration": {
+                  "type": "number",
+                  "example": 60
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/services/{id}": {
+      "get": {
+        "tags": ["Services"],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Services"],
+        "description": "services description",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "serviceName": {
+                  "type": "string",
+                  "example": "Hair trimming"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "description text here"                 
+                },
+                 "price": {
+                  "type": "number",
+                  "example": 100
+                },
+                "duration": {
+                  "type": "number",
+                  "example": 60
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Services"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/appointments": {
+      "get": {
+        "summary": "Get all appointments (optionally filtered)",
+        "tags": ["Appointments"],
+        "description": "this is the description",
+        "parameters": [
+          {
+            "name": "client",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Filter appointments by client ID"
+          },
+          {
+            "name": "caregiver",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Filter appointments by caregiver ID"
+          },
+          {
+            "name": "statusType",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": ["pending", "confirmed", "completed", "cancelled"],
+            "description": "Filter appointments by status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Appointments"],
+        "summary": "Create new appointment with client, caregiver, and service ID",
+        "description": "",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "client": {
+                  "type": "string",
+                  "example": "64fe7b193c2a3d001b20fc19",
+                  "description": "MongoDB ObjectId of the client"
+                },
+                "caregiver": {
+                  "type": "string",
+                  "example": "64fe7b193c2a3d001b20fc22",
+                  "description": "MongoDB ObjectId of the caregiver"
+                },
+                "service": {
+                  "type": "string",
+                  "example": "64fe7b193c2a3d001b20fc29",
+                  "description": "MongoDB ObjectId of the service being booked"
+                },
+                "contact": {
+                  "type": "string",
+                  "example": "client@example.com",
+                  "description": "Email or phone number for contact"
+                },
+                "statusType": {
+                  "type": "string",
+                  "enum": ["pending", "confirmed", "completed", "cancelled"],
+                  "example": "pending",
+                  "description": "Status of the appointment"
+                },
+                "notes": {
+                  "type": "string",
+                  "example": "Please arrive 10 minutes early.",
+                  "description": "Additional notes or instructions"
+                },
+                "aptDate": {
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2025-07-15T13:30:00Z",
+                  "description": "Date and time of the appointment"
+                }
+              },
+              "required": ["client", "caregiver", "service", "contact", "statusType", "aptDate"]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/appointments/{id}": {
+      "get": {
+        "tags": ["Appointments"],
+        "summary": "Get a single appointment by ID",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "MongoDB ObjectId of the appointment"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Appointments"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "client": {
+                  "type": "string",
+                  "example": "64fe7b193c2a3d001b20fc19",
+                  "description": "MongoDB ObjectId of the client"
+                },
+                "caregiver": {
+                  "type": "string",
+                  "example": "64fe7b193c2a3d001b20fc22",
+                  "description": "MongoDB ObjectId of the caregiver"
+                },
+                "service": {
+                  "type": "string",
+                  "example": "64fe7b193c2a3d001b20fc29",
+                  "description": "MongoDB ObjectId of the service being booked"
+                },
+                "contact": {
+                  "type": "string",
+                  "example": "client@example.com",
+                  "description": "Email or phone number for contact"
+                },
+                "statusType": {
+                  "type": "string",
+                  "enum": ["pending", "confirmed", "completed", "cancelled"],
+                  "example": "pending",
+                  "description": "Status of the appointment"
+                },
+                "notes": {
+                  "type": "string",
+                  "example": "Please arrive 10 minutes early.",
+                  "description": "Additional notes or instructions"
+                },
+                "aptDate": {
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2025-07-15T13:30:00Z",
+                  "description": "Date and time of the appointment"
+                }
+              },
+              "required": ["client", "caregiver", "service", "contact", "statusType", "aptDate"]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Appointments"],
         "description": "",
         "parameters": [
           {
