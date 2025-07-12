@@ -1,9 +1,8 @@
 import mongoose from 'mongoose';
 import AppointmentSchema from '../models/Appointment.js';
-
-import Client from '../models/Client.js';
-import Caregiver from '../models/Caregiver.js';
-import Service from '../models/Service.js';
+import ClientSchema from '../models/Client.js';
+import CaregiverSchema from '../models/caregiver.js';
+import ServiceSchema from '../models/services.js';
 
 
 export const getAllAppointments = async (req, res) => {
@@ -50,9 +49,9 @@ export const createNewAppointment = async (req, res) => {
 
         // Check that a valid client, caregiver, and service were sent
         const [clientExists, caregiverExists, serviceExists] = await Promise.all([
-            Client.findById(client),
-            Caregiver.findById(caregiver),
-            Service.findById(service),
+            ClientSchema.findById(client),
+            CaregiverSchema.findById(caregiver),
+            ServiceSchema.findById(service),
         ]);
 
         if (!clientExists || !caregiverExists || !serviceExists) {
