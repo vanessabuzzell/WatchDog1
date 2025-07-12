@@ -48,7 +48,7 @@ export const updateClientById = async (req, res) => {
         if (!result) {
             return res.status(404).json({ message: "Client not found" });
         }
-        res.status(204).json({ message: "Client updated", client: result });
+        res.status(200).json({ message: "Client updated", client: result });
     } catch (err) {
         res.status(400).json({ message: "Update failed", error: err.message });
     }
