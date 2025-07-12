@@ -5,16 +5,44 @@
     "description": "WatchDog API",
     "version": "1.0.0"
   },
+    "tags": [
+    {
+      "name": "Clients",
+      "description": "Users in seek of dog care treatment"
+    },
+    {
+      "name": "Caregiver", 
+      "description": "Businesses/entities offering dog care services"
+    },
+        {
+      "name": "Services", 
+      "description": "List of dog care services provided"
+    },
+        {
+      "name": "Appointments", 
+      "description": "Combination of a client, caregiver, and list of services"
+    }
+  ],
   "host": "watchdog-7ja8.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
   ],
   "paths": {
-    "/clients/": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/clients": {
       "get": {
         "tags": ["Clients"],
-        "description": "list all existing clients",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -26,7 +54,7 @@
       },
       "post": {
         "tags": ["Clients"],
-        "description": "create new client record",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -70,7 +98,7 @@
     "/clients/{id}": {
       "get": {
         "tags": ["Clients"],
-        "description": "obtain client data by their record id",
+        "description": "",
         "produces": [
           "application/json"
         ],
@@ -99,13 +127,13 @@
       },
       "put": {
         "tags": ["Clients"],
-        "description": "Update a single or multiple field of a given document",
+        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "ID of the client to update.",
+             "description": "ID of the client to update.",
             "type": "string"
           },
           {
@@ -151,7 +179,7 @@
       },
       "delete": {
         "tags": ["Clients"],
-        "description": "delete a client by their record id",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -176,9 +204,10 @@
         }
       }
     },
-    "/caregivers/": {
+    "/caregiver": {
       "get": {
-        "description": "list all existing clients",
+        "tags": ["Caregiver"],
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -189,7 +218,8 @@
         }
       },
       "post": {
-        "description": "create new client record",
+        "tags": ["Caregiver"],
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -198,23 +228,43 @@
               "type": "object",
               "properties": {
                 "name": {
+                  "type": "string",
                   "example": "firstName lastName"
                 },
-                "email": {
+                "services": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": ["hairgrooming", "walking", "vaccination"]                 
+                },
+                 "hourlyRate": {
+                  "type": "number",
+                  "example": 100
+                },
+                "availability": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "date-time"
+                    },
+                  "example": ["2025-07-15T13:30:00Z", "2025-08-15T13:30:00Z", "2025-09-15T13:30:00Z" ]
+                },
+                 "yearsExperience": {
+                  "type": "number",
+                  "example": 5
+                },
+                 "bio": {
                   "type": "string",
-                  "example": "myemailaddress@email.com"                 
-                },
-                 "city": {
-                  "example": "Springfield"
-                },
-                "location": {
-                  "example": "Illinois"
+                  "example": "Hello this is my biography"
                 },
                 "image": {
+                  "type": "string",
                   "example": "imageBase64EncodedUrlHere"
                 },              
-                "bio": {
-                  "example": "Hello this is my biography"
+                "email": {
+                  "type": "string",
+                  "example": "dogcaregiver@lovedogs.com"
                 }
               }
             }
@@ -230,9 +280,10 @@
         }
       }
     },
-    "/caregivers/{id}": {
+    "/caregiver/{id}": {
       "get": {
-        "description": "obtain client data by their record id",
+        "tags": ["Caregiver"],
+        "description": "",
         "produces": [
           "application/json"
         ],
@@ -260,13 +311,14 @@
         }
       },
       "put": {
-        "description": "Update a single or multiple field of a given document",
+        "tags": ["Caregiver"],
+        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "ID of the client to update.",
+            "description": "ID of the caregiver to update.",
             "type": "string"
           },
           {
@@ -276,23 +328,43 @@
               "type": "object",
               "properties": {
                 "name": {
+                  "type": "string",
                   "example": "firstName lastName"
                 },
-                "email": {
+                "services": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": ["hairgrooming", "walking", "vaccination"]                 
+                },
+                 "hourlyRate": {
+                  "type": "number",
+                  "example": 100
+                },
+                "availability": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "date-time"
+                    },
+                  "example": ["2025-07-15T13:30:00Z", "2025-08-15T13:30:00Z", "2025-09-15T13:30:00Z" ]
+                },
+                 "yearsExperience": {
+                  "type": "number",
+                  "example": 5
+                },
+                 "bio": {
                   "type": "string",
-                  "example": "myemailaddress@email.com"                 
-                },
-                 "city": {
-                  "example": "Springfield"
-                },
-                "location": {
-                  "example": "Illinois"
+                  "example": "Hello this is my biography"
                 },
                 "image": {
+                  "type": "string",
                   "example": "imageBase64EncodedUrlHere"
                 },              
-                "bio": {
-                  "example": "Hello this is my biography"
+                "email": {
+                  "type": "string",
+                  "example": "dogcaregiver@lovedogs.com"
                 }
               }
             }
@@ -311,7 +383,8 @@
         }
       },
       "delete": {
-        "description": "delete a client by their record id",
+        "tags": ["Caregiver"],
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -336,9 +409,10 @@
         }
       }
     },
-    "/services/": {
+    "/services": {
       "get": {
-        "description": "list all existing clients",
+        "tags": ["Services"],
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -349,7 +423,8 @@
         }
       },
       "post": {
-        "description": "create new client record",
+        "tags": ["Services"],
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -357,24 +432,21 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "example": "firstName lastName"
-                },
-                "email": {
+                "serviceName": {
                   "type": "string",
-                  "example": "myemailaddress@email.com"                 
+                  "example": "Hair trimming"
                 },
-                 "city": {
-                  "example": "Springfield"
+                "description": {
+                  "type": "string",
+                  "example": "description text here"                 
                 },
-                "location": {
-                  "example": "Illinois"
+                 "price": {
+                  "type": "number",
+                  "example": 100
                 },
-                "image": {
-                  "example": "imageBase64EncodedUrlHere"
-                },              
-                "bio": {
-                  "example": "Hello this is my biography"
+                "duration": {
+                  "type": "number",
+                  "example": 60
                 }
               }
             }
@@ -392,7 +464,8 @@
     },
     "/services/{id}": {
       "get": {
-        "description": "obtain client data by their record id",
+        "tags": ["Services"],
+        "description": "",
         "produces": [
           "application/json"
         ],
@@ -420,13 +493,13 @@
         }
       },
       "put": {
-        "description": "Update a single or multiple field of a given document",
+        "tags": ["Services"],
+        "description": "services description",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "ID of the client to update.",
             "type": "string"
           },
           {
@@ -435,24 +508,21 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "example": "firstName lastName"
-                },
-                "email": {
+                "serviceName": {
                   "type": "string",
-                  "example": "myemailaddress@email.com"                 
+                  "example": "Hair trimming"
                 },
-                 "city": {
-                  "example": "Springfield"
+                "description": {
+                  "type": "string",
+                  "example": "description text here"                 
                 },
-                "location": {
-                  "example": "Illinois"
+                 "price": {
+                  "type": "number",
+                  "example": 100
                 },
-                "image": {
-                  "example": "imageBase64EncodedUrlHere"
-                },              
-                "bio": {
-                  "example": "Hello this is my biography"
+                "duration": {
+                  "type": "number",
+                  "example": 60
                 }
               }
             }
@@ -471,7 +541,8 @@
         }
       },
       "delete": {
-        "description": "delete a client by their record id",
+        "tags": ["Services"],
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -496,9 +567,35 @@
         }
       }
     },
-    "/appointments/": {
+    "/appointments": {
       "get": {
-        "description": "list all existing clients",
+        "summary": "Get all appointments (optionally filtered)",
+        "tags": ["Appointments"],
+        "description": "this is the description",
+        "parameters": [
+          {
+            "name": "client",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Filter appointments by client ID"
+          },
+          {
+            "name": "caregiver",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Filter appointments by caregiver ID"
+          },
+          {
+            "name": "statusType",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": ["pending", "confirmed", "completed", "cancelled"],
+            "description": "Filter appointments by status"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -509,34 +606,57 @@
         }
       },
       "post": {
-        "description": "create new client record",
+        "tags": ["Appointments"],
+        "summary": "Create new appointment with client, caregiver, and service ID",
+        "description": "",
+        "consumes": ["application/json"],
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "example": "firstName lastName"
-                },
-                "email": {
+                "client": {
                   "type": "string",
-                  "example": "myemailaddress@email.com"                 
+                  "example": "64fe7b193c2a3d001b20fc19",
+                  "description": "MongoDB ObjectId of the client"
                 },
-                 "city": {
-                  "example": "Springfield"
+                "caregiver": {
+                  "type": "string",
+                  "example": "64fe7b193c2a3d001b20fc22",
+                  "description": "MongoDB ObjectId of the caregiver"
                 },
-                "location": {
-                  "example": "Illinois"
+                "service": {
+                  "type": "string",
+                  "example": "64fe7b193c2a3d001b20fc29",
+                  "description": "MongoDB ObjectId of the service being booked"
                 },
-                "image": {
-                  "example": "imageBase64EncodedUrlHere"
-                },              
-                "bio": {
-                  "example": "Hello this is my biography"
+                "contact": {
+                  "type": "string",
+                  "example": "client@example.com",
+                  "description": "Email or phone number for contact"
+                },
+                "statusType": {
+                  "type": "string",
+                  "enum": ["pending", "confirmed", "completed", "cancelled"],
+                  "example": "pending",
+                  "description": "Status of the appointment"
+                },
+                "notes": {
+                  "type": "string",
+                  "example": "Please arrive 10 minutes early.",
+                  "description": "Additional notes or instructions"
+                },
+                "aptDate": {
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2025-07-15T13:30:00Z",
+                  "description": "Date and time of the appointment"
                 }
-              }
+              },
+              "required": ["client", "caregiver", "service", "contact", "statusType", "aptDate"]
             }
           }
         ],
@@ -552,7 +672,9 @@
     },
     "/appointments/{id}": {
       "get": {
-        "description": "obtain client data by their record id",
+        "tags": ["Appointments"],
+        "summary": "Get a single appointment by ID",
+        "description": "",
         "produces": [
           "application/json"
         ],
@@ -561,7 +683,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "MongoDB ObjectId of the appointment"
           }
         ],
         "responses": {
@@ -580,41 +703,55 @@
         }
       },
       "put": {
-        "description": "Update a single or multiple field of a given document",
+        "tags": ["Appointments"],
+        "description": "",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "ID of the client to update.",
-            "type": "string"
-          },
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "example": "firstName lastName"
-                },
-                "email": {
+                "client": {
                   "type": "string",
-                  "example": "myemailaddress@email.com"                 
+                  "example": "64fe7b193c2a3d001b20fc19",
+                  "description": "MongoDB ObjectId of the client"
                 },
-                 "city": {
-                  "example": "Springfield"
+                "caregiver": {
+                  "type": "string",
+                  "example": "64fe7b193c2a3d001b20fc22",
+                  "description": "MongoDB ObjectId of the caregiver"
                 },
-                "location": {
-                  "example": "Illinois"
+                "service": {
+                  "type": "string",
+                  "example": "64fe7b193c2a3d001b20fc29",
+                  "description": "MongoDB ObjectId of the service being booked"
                 },
-                "image": {
-                  "example": "imageBase64EncodedUrlHere"
-                },              
-                "bio": {
-                  "example": "Hello this is my biography"
+                "contact": {
+                  "type": "string",
+                  "example": "client@example.com",
+                  "description": "Email or phone number for contact"
+                },
+                "statusType": {
+                  "type": "string",
+                  "enum": ["pending", "confirmed", "completed", "cancelled"],
+                  "example": "pending",
+                  "description": "Status of the appointment"
+                },
+                "notes": {
+                  "type": "string",
+                  "example": "Please arrive 10 minutes early.",
+                  "description": "Additional notes or instructions"
+                },
+                "aptDate": {
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2025-07-15T13:30:00Z",
+                  "description": "Date and time of the appointment"
                 }
-              }
+              },
+              "required": ["client", "caregiver", "service", "contact", "statusType", "aptDate"]
             }
           }
         ],
@@ -631,7 +768,8 @@
         }
       },
       "delete": {
-        "description": "delete a client by their record id",
+        "tags": ["Appointments"],
+        "description": "",
         "parameters": [
           {
             "name": "id",
