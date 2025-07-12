@@ -5,6 +5,7 @@ import indexRoutes from './routes/index.js';
 import clientsRoutes from './routes/clients.js';
 import caregiverRoutes from './routes/caregiver.js';
 import servicesRoutes from './routes/services.js';
+import appointmentsRoutes from './routes/appointments.js';
 import bodyParser from 'body-parser';
 import mongodb from './db/connect.js';
 
@@ -38,6 +39,7 @@ app.use("/", indexRoutes);
 app.use("/clients", clientsRoutes);
 app.use("/caregiver", caregiverRoutes);
 app.use("/services", servicesRoutes);
+app.use("/appointments", appointmentsRoutes);
 
 // catch all error handler
 app.use((err, req, res, next) => {
