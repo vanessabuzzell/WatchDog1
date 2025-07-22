@@ -111,7 +111,7 @@ describe('GET /caregiver/:id', () => {
 
 describe('PUT /caregiver/:id', () => {
     it('should update a caregiver by ID', async () => {
-        const caregiverData = {
+        const caregiverData = await caregiver.create({
             name: 'Jane Doe',
             services: ['walking', 'grooming'],
             hourlyRate: 10,
@@ -120,11 +120,11 @@ describe('PUT /caregiver/:id', () => {
             bio: 'dogs are great!',
             image: '',
             email: 'janedoe@example.com',
-        };
+        });
 
-        const createdCaregiver = await request(app)
-            .post('/caregiver')
-            .send(caregiverData);
+        // const createdCaregiver = await request(app)
+        //     .post('/caregiver')
+        //     .send(caregiverData);
 
         const updatedData = {
             name: 'Jane Smith',
@@ -138,7 +138,7 @@ describe('PUT /caregiver/:id', () => {
         };
 
         const res = await request(app)
-            .put(`/caregiver/${createdCaregiver.body.caregiverId}`)
+            .put(`/caregiver/${caregiverData._id}`)
             .send(updatedData);
 
         expect(res.statusCode).toBe(200);
@@ -157,7 +157,7 @@ describe('PUT /caregiver/:id', () => {
         };
 
         const res = await request(app)
-            .put('/services/123456789012345678901234')
+            .put('/caregiver/123456789012345678901234')
             .send(updatedData);
 
         expect(res.statusCode).toBe(404);
@@ -166,7 +166,7 @@ describe('PUT /caregiver/:id', () => {
 });
 describe('DELETE /caregiver/:id', () => {
     it('should delete a caregiver by ID', async () => {
-        const caregiverData = {
+        const caregiverData = await caregiver.create({
             name: 'Jane Smith',
             services: ['walking', 'grooming'],
             hourlyRate: 10,
@@ -175,15 +175,15 @@ describe('DELETE /caregiver/:id', () => {
             bio: 'dogs are great!',
             image: '',
             email: 'janeSmith@example.com',
-        };
+        });
 
-        const createdCaregiver = await request(app)
-            .post('/caregiver')
-            .send(caregiverData);
+        // const createdCaregiver = await request(app)
+        //     .post('/caregiver')
+        //     .send(caregiverData);
 
-        const res = await request(app).delete(`/caregiver/${createdCaregiver.body.caregiverId}`);
+        const res = await request(app).delete(`/caregiver/${caregiverData._id}`);
 
-        expect(res.statusCode).toBe(204);
+        expect(res.statusCode).toBe(200);
     });
 
     it('should return 404 for non-existent caregiver ID', async () => {

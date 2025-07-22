@@ -42,11 +42,11 @@ export const updateCaregiverById = async (req, res) => {
         return res.status(400).json({ message: "Invalid caregiver ID" });
     }
     try {
-        const caregiver = await CaregiverSchema.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+        const result = await CaregiverSchema.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
         if (!result) {
             return res.status(404).json({ message: "Caregiver not found" });
         }
-        res.status(200).json({ message: "Caregiver updated", caregiver: caregiver });
+        res.status(200).json({ message: "Caregiver updated", caregiver: result });
     } catch (err) {
         res.status(400).json({ message: "Update failed", error: err.message });
     }
