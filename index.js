@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'views')))
 const { auth } = pkg;
 dotenv.config();
 const config = {
-    authRequired: false,
+    authRequired: true,
     auth0Logout: true,
     // secret should be a long, randomly-generated string stored in env
     secret: process.env.SECRET,

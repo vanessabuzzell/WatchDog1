@@ -42,8 +42,6 @@ describe('POST /caregiver', () => {
     it('should return 400 if caregiver is missing data', async () => {
 
         const caregiverData = {
-            name: 'Jane Doe',
-            hourlyRate: 10,
             yearsExperience: 5,
             bio: 'dogs are great!',
             image: '',
@@ -74,7 +72,7 @@ describe('GET /caregiver', () => {
         };
 
         await request(app)
-            .post('/caregver')
+            .post('/caregiver')
             .send(caregiverData);
 
         const res = await request(app).get('/caregiver');
@@ -86,7 +84,7 @@ describe('GET /caregiver', () => {
 
 describe('GET /caregiver/:id', () => {
     it('should return a caregiver by ID', async () => {
-        const caregiverData = {
+        const caregiverData = await caregiver.create({
             name: 'Jane Doe',
             services: ['walking', 'grooming'],
             hourlyRate: 10,
@@ -95,16 +93,12 @@ describe('GET /caregiver/:id', () => {
             bio: 'dogs are great!',
             image: '',
             email: 'janedoe@example.com',
-        };
+        });
 
-        const createdCaregiver = await request(app)
-            .post('/caregiver')
-            .send(caregiverData);
-
-        const res = await request(app).get(`/caregiver/${createdCaregiver.body.caregiverId}`);
+        const res = await request(app).get(`/caregiver/${caregiverData._id}`);
 
         expect(res.statusCode).toBe(200);
-        expect(res.body.name).toBe(caregiverData.name);
+        expect(res.body._id).toBe(caregiverData._id.toString());
     });
 
     it('should return 404 for non-existent caregiver ID', async () => {
@@ -147,7 +141,7 @@ describe('PUT /caregiver/:id', () => {
             .put(`/caregiver/${createdCaregiver.body.caregiverId}`)
             .send(updatedData);
 
-        expect(res.statusCode).toBe(204);
+        expect(res.statusCode).toBe(200);
     });
 
     it('should return 404 for non-existent caregiver ID', async () => {

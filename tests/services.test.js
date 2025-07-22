@@ -21,7 +21,7 @@ beforeEach(async () => {
 describe('POST /services', () => {
     it('should create a service with valid data', async () => {
         const serviceData = {
-            name: 'Dog Walking',
+            serviceName: 'Dog Walking',
             description: 'Daily dog walking service',
             price: 20,
             duration: 30,
@@ -53,7 +53,7 @@ describe('POST /services', () => {
 describe('GET /services', () => {
     it('should return all services', async () => {
         const serviceData = {
-            name: 'Dog Walking',
+            serviceName: 'Dog Walking',
             description: 'Daily dog walking service',
             price: 20,
             duration: 30,
@@ -72,7 +72,7 @@ describe('GET /services', () => {
 describe('GET /services/:id', () => {
     it('should return a service by ID', async () => {
         const serviceData = {
-            name: 'Dog Walking',
+            serviceName: 'Dog Walking',
             description: 'Daily dog walking service',
             price: 20,
             duration: 30,
@@ -99,7 +99,7 @@ describe('GET /services/:id', () => {
 describe('PUT /services/:id', () => {
     it('should update a service by ID', async () => {
         const serviceData = {
-            name: 'Dog Walking',
+            serviceName: 'Dog Walking',
             description: 'Daily dog walking service',
             price: 20,
             duration: 30,
@@ -110,7 +110,7 @@ describe('PUT /services/:id', () => {
             .send(serviceData);
 
         const updatedData = {
-            name: 'Dog Walking Updated',
+            serviceName: 'Dog Walking Updated',
             description: 'Updated daily dog walking service',
             price: 25,
             duration: 35,
@@ -125,7 +125,7 @@ describe('PUT /services/:id', () => {
 
     it('should return 404 for non-existent service ID', async () => {
         const updatedData = {
-            name: 'Dog Walking Updated',
+            serviceName: 'Dog Walking Updated',
             description: 'Updated daily dog walking service',
             price: 25,
             duration: 35,
@@ -143,7 +143,7 @@ describe('PUT /services/:id', () => {
 describe('DELETE /services/:id', () => {
     it('should delete a service by ID', async () => {
         const serviceData = {
-            name: 'Dog Walking',
+            serviceName: 'Dog Walking',
             description: 'Daily dog walking service',
             price: 20,
             duration: 30,
@@ -178,7 +178,7 @@ describe('Invalid ID format', () => {
 describe('Service validation errors', () => {
     it('should return 400 for invalid service data on creation', async () => {
         const serviceData = {
-            name: 'Dog Walking',
+            serviceName: 'Dog Walking',
             description: 'Daily dog walking service',
             price: 'invalidPrice', // Invalid price
             duration: 30,
