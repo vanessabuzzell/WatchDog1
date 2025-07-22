@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import request from 'supertest';
-import { MongoMemoryServer} from "mongodb-memory-server";
+import { MongoMemoryServer } from "mongodb-memory-server";
 import app from "../index.js";
 import caregiver from "../models/caregiver.js";
 
@@ -23,7 +23,7 @@ describe('POST /caregiver', () => {
 
         const caregiverData = {
             name: 'Jane Doe',
-            services: ['walking', 'grooming'], 
+            services: ['walking', 'grooming'],
             hourlyRate: 10,
             availability: ['2025-07-15T13:30:00Z'],
             yearsExperience: 5,
@@ -36,6 +36,8 @@ describe('POST /caregiver', () => {
 
         expect(res.statusCode).toBe(201);
         expect(res.body.message).toMatch(/Caregiver created/i);
+
+    });
 
     it('should return 400 if caregiver is missing data', async () => {
 
@@ -55,14 +57,14 @@ describe('POST /caregiver', () => {
         expect(res.statusCode).toBe(400);
         expect(res.body.message).toMatch(/Validation error/i);
     });
-    })
-});
+})
+
 
 describe('GET /caregiver', () => {
     it('should return all caregivers', async () => {
         const caregiverData = {
             name: 'Jane Doe',
-            services: ['walking', 'grooming'], 
+            services: ['walking', 'grooming'],
             hourlyRate: 10,
             availability: ['2025-07-15T13:30:00Z'],
             yearsExperience: 5,
@@ -86,7 +88,7 @@ describe('GET /caregiver/:id', () => {
     it('should return a caregiver by ID', async () => {
         const caregiverData = {
             name: 'Jane Doe',
-            services: ['walking', 'grooming'], 
+            services: ['walking', 'grooming'],
             hourlyRate: 10,
             availability: ['2025-07-15T13:30:00Z'],
             yearsExperience: 5,
@@ -117,7 +119,7 @@ describe('PUT /caregiver/:id', () => {
     it('should update a caregiver by ID', async () => {
         const caregiverData = {
             name: 'Jane Doe',
-            services: ['walking', 'grooming'], 
+            services: ['walking', 'grooming'],
             hourlyRate: 10,
             availability: ['2025-07-15T13:30:00Z'],
             yearsExperience: 5,
@@ -132,7 +134,7 @@ describe('PUT /caregiver/:id', () => {
 
         const updatedData = {
             name: 'Jane Smith',
-            services: ['walking', 'grooming'], 
+            services: ['walking', 'grooming'],
             hourlyRate: 10,
             availability: ['2025-07-15T13:30:00Z'],
             yearsExperience: 5,
@@ -151,7 +153,7 @@ describe('PUT /caregiver/:id', () => {
     it('should return 404 for non-existent caregiver ID', async () => {
         const updatedData = {
             name: 'Jane Smith',
-            services: ['walking', 'grooming'], 
+            services: ['walking', 'grooming'],
             hourlyRate: 10,
             availability: ['2025-07-15T13:30:00Z'],
             yearsExperience: 5,
@@ -172,7 +174,7 @@ describe('DELETE /caregiver/:id', () => {
     it('should delete a caregiver by ID', async () => {
         const caregiverData = {
             name: 'Jane Smith',
-            services: ['walking', 'grooming'], 
+            services: ['walking', 'grooming'],
             hourlyRate: 10,
             availability: ['2025-07-15T13:30:00Z'],
             yearsExperience: 5,

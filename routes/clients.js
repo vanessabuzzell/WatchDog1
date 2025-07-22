@@ -1,8 +1,12 @@
-import { createNewClient, deleteClientById, getAllClients, getClientById, updateClientById } from '../controllers/clients.js';
 import express from "express";
-// import { handleValidation, validateClient, validateClientPatch } from '../middleware/validator.js';
+// import pkg from "express-openid-connect";
+import { requiresAuth } from "../middleware/auth.js";
+import { createNewClient, deleteClientById, getAllClients, getClientById, updateClientById } from '../controllers/clients.js';
 
+// const { requiresAuth } = pkg;
 const router = express.Router();
+
+router.use(requiresAuth());
 
 // this is /clients because it is defined in the routes/index.js file
 router.get("/", getAllClients);

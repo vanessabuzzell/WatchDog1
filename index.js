@@ -8,6 +8,8 @@ import servicesRoutes from './routes/services.js';
 import appointmentsRoutes from './routes/appointments.js';
 import bodyParser from 'body-parser';
 import mongodb from './db/connect.js';
+import pkg from 'express-openid-connect';
+import dotenv from 'dotenv';
 
 // Get current directory for ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -34,6 +36,29 @@ app
 // static htmls should go after passport but before routes 
 app.use(express.static(path.join(__dirname, 'views')))
 
+const { auth } = pkg;
+dotenv.config();
+const config = {
+    authRequired: false,
+    auth0Logout: true,
+    // secret should be a long, randomly-generated string stored in env
+    secret: process.env.SECRET,
+    // Note: The base URL must be the URL of your application.
+    baseURL: process.env.BASE_URL,
+    // The client ID is the one you get from Auth0
+    clientID: process.env.CLIENT_ID,
+    // Use the issuer base URL, not the full URL for callback
+    issuerBaseURL: process.env.ISSUER_BASE_URL,
+};
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
+
+// req.isAuthenticated is provided from the auth router
+app.get('/', (req, res) => {
+    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+});
+
 // routes
 app.use("/", indexRoutes);
 app.use("/clients", clientsRoutes);
@@ -48,30 +73,6 @@ app.use((err, req, res, next) => {
         message: err.message || 'Internal Server Error'
     });
 });
-
-const { auth } = require('express-openid-connect');
-require('dotenv').config();
-const config = {
-  authRequired: false,
-  auth0Logout: true,
-  // secret should be a long, randomly-generated string stored in env
-  secret: process.env.SECRET,
-  // Note: The base URL must be the URL of your application.
-  baseURL: process.env.BASE_URL,
-// The client ID is the one you get from Auth0
-  clientID: process.env.CLIENT_ID,
-  // Use the issuer base URL, not the full URL for callback
-  issuerBaseURL: process.env.ISSUER_BASE_URL,
-};
-
-// auth router attaches /login, /logout, and /callback routes to the baseURL
-app.use(auth(config));
-
-// req.isAuthenticated is provided from the auth router
-app.get('/', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
-});
-
 
 mongodb.initDb((err, mongodb) => {
     if (err) {

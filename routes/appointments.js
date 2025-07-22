@@ -1,9 +1,12 @@
-import { createNewAppointment, deleteAppointmentById, getAllAppointments, getAppointmentById, updateAppointmentById } from '../controllers/appointments.js';
 import express from "express";
-// import { handleValidation, validateAppointment, validateAppointmentPatch } from '../middleware/validator.js';
+// import pkg from 'express-openid-connect';
+import { requiresAuth } from "../middleware/auth.js";
+import { createNewAppointment, deleteAppointmentById, getAllAppointments, getAppointmentById, updateAppointmentById } from '../controllers/appointments.js';
 
+// const { requiresAuth } = pkg;
 const router = express.Router();
 
+router.use(requiresAuth());
 // this is /appointments because it is defined in the routes/index.js file
 router.get("/", getAllAppointments);
 
